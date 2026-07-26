@@ -1,0 +1,79 @@
+.link {
+  display: inline-flex;
+  align-items: center;
+  color: var(--cream-bright);
+  transition: color var(--duration-base) var(--ease-tactical), opacity var(--duration-base);
+}
+
+.link:hover {
+  color: var(--white);
+}
+
+.link:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: 2px;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.mark {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  color: currentColor;
+}
+
+.wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  gap: 0.18rem;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.group {
+  font-family: var(--font-sans);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  padding-left: 0.08rem;
+}
+
+.compact .mark {
+  width: 32px;
+  height: 32px;
+}
+
+.compact .name {
+  font-size: 0.95rem;
+}
+
+@media (max-width: 480px) {
+  .mark {
+    width: 34px;
+    height: 34px;
+  }
+
+  .name {
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+  }
+
+  .group {
+    letter-spacing: 0.32em;
+  }
+}

@@ -1,0 +1,113 @@
+.strip {
+  position: relative;
+  border-top: 1px solid var(--orange-grid-strong);
+  background-color: var(--bg-strip);
+  background-image:
+    linear-gradient(var(--orange-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--orange-grid) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: 0 0;
+  overflow: hidden;
+}
+
+.strip::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(10, 10, 10, 0.15) 0%,
+    transparent 40%,
+    transparent 60%,
+    rgba(10, 10, 10, 0.25) 100%
+  );
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2rem;
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 3vw, 2.25rem) var(--page-pad) clamp(1.25rem, 2.5vw, 1.75rem);
+  min-height: var(--strip-min-height);
+  align-items: start;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.25rem;
+  min-height: 100%;
+}
+
+.logs {
+  font-family: var(--font-mono);
+  font-size: clamp(0.85rem, 1.35vw, 1.05rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.55;
+  text-transform: uppercase;
+  color: var(--orange);
+  text-shadow: 0 0 24px rgba(255, 90, 0, 0.25);
+}
+
+.integrity {
+  font-family: var(--font-mono);
+  font-size: clamp(0.62rem, 0.95vw, 0.72rem);
+  letter-spacing: 0.04em;
+  line-height: 1.55;
+  text-transform: uppercase;
+  color: var(--cream-muted);
+  max-width: 52ch;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  gap: 0.15rem;
+  padding-top: 0.1rem;
+}
+
+.rightLine {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2.4vw, 1.85rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+  text-transform: uppercase;
+  color: var(--cream-bright);
+}
+
+.usa {
+  margin-top: 1.25rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.8vw, 2.1rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--cream-bright);
+}
+
+@media (max-width: 768px) {
+  .inner {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .right {
+    align-items: flex-start;
+    text-align: left;
+    border-top: 1px solid var(--orange-grid-strong);
+    padding-top: 1.25rem;
+  }
+
+  .usa {
+    margin-top: 0.75rem;
+  }
+}
