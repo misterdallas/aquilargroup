@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact | Aquilar Group</title>
+    <meta
+      name="description"
+      content="Contact Aquilar Group, LLC for defense consulting, capture management, and ISR support. Georgia-based. Clearance-friendly discussions available."
+    />
+    <meta name="theme-color" content="#0A0A0A" />
+    <link rel="canonical" href="https://aquilargroup.com/contact.html" />
+    <meta property="og:title" content="Contact | Aquilar Group" />
+    <link rel="icon" href="assets/favicon.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to mission content</a>
+    <div class="app-shell">
+      <header class="header">
+        <div class="header__inner">
+          <a class="logo" href="index.html" aria-label="Aquilar Group — Home">
+            <img class="logo__mark" src="assets/logo-mark-white.svg" width="42" height="42" alt="" />
+            <span class="logo__wordmark">
+              <span class="logo__name">AQUILAR</span>
+              <span class="logo__group">GROUP</span>
+            </span>
+          </a>
+          <button
+            class="nav-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="primary-nav"
+            aria-label="Open navigation"
+          >
+            <span></span><span></span><span></span>
+          </button>
+          <nav class="nav" id="primary-nav" aria-label="Primary">
+            <ul class="nav__list">
+              <li><a class="nav__link" href="index.html">Home</a></li>
+              <li><a class="nav__link" href="operations.html">Operations</a></li>
+              <li><a class="nav__link" href="systems.html">Systems</a></li>
+              <li>
+                <a class="nav__link is-active" href="contact.html" aria-current="page">Contact</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main id="main">
+        <section class="page-hero">
+          <div class="hero-copy">
+            <p class="section-label">Channel Open · Secure Intake</p>
+            <h1 class="display-headline display-headline--sm">Contact</h1>
+            <p class="lead">
+              Direct line for program managers, capture leads, and technical
+              directors. State the requirement. We respond with status.
+            </p>
+          </div>
+
+          <div class="hero-visual">
+            <div class="hero-visual__frame">
+              <span class="badge hero-visual__badge">Uplink</span>
+              <canvas id="viz-canvas" class="hero-visual__canvas" aria-hidden="true"></canvas>
+              <svg class="hero-visual__flag" viewBox="0 0 32 20" aria-hidden="true">
+                <rect width="32" height="20" fill="#E8E0D0" opacity="0.15" />
+                <rect y="0" width="32" height="1.54" fill="#E8E0D0" opacity="0.55" />
+                <rect y="3.08" width="32" height="1.54" fill="#E8E0D0" opacity="0.55" />
+                <rect y="6.15" width="32" height="1.54" fill="#E8E0D0" opacity="0.55" />
+                <rect y="9.23" width="32" height="1.54" fill="#E8E0D0" opacity="0.55" />
+                <rect y="12.31" width="32" height="1.54" fill="#E8E0D0" opacity="0.55" />
+                <rect y="15.38" width="32" height="1.54" fill="#E8E0D0" opacity="0.55" />
+                <rect y="18.46" width="32" height="1.54" fill="#E8E0D0" opacity="0.55" />
+                <rect width="12.5" height="10.8" fill="#FF5A00" opacity="0.75" />
+              </svg>
+            </div>
+            <p class="status-display hero-visual__status">
+              Channel: <span class="accent">Open</span>
+            </p>
+          </div>
+        </section>
+
+        <section class="contact-layout" style="padding-top: 0.5rem">
+          <div>
+            <form class="contact-form" id="contact-form">
+              <div class="field">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" autocomplete="name" required placeholder="Full name" />
+              </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  required
+                  placeholder="name@organization.mil"
+                />
+              </div>
+              <div class="field">
+                <label for="organization">Organization</label>
+                <input
+                  id="organization"
+                  name="organization"
+                  type="text"
+                  autocomplete="organization"
+                  required
+                  placeholder="Agency / company"
+                />
+              </div>
+              <div class="field">
+                <label for="classification">Classification Level Awareness</label>
+                <select id="classification" name="classification">
+                  <option value="UNCLASSIFIED" selected>Unclassified discussion</option>
+                  <option value="CUI">CUI may apply (use approved channel)</option>
+                  <option value="CLEARED">Cleared discussion requested</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="message">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  rows="5"
+                  placeholder="Requirement, timeline, and preferred follow-up channel."
+                ></textarea>
+              </div>
+              <p class="form-note">
+                Unclassified intake only. Submitting opens your mail client with
+                a pre-filled message to contact@aquilargroup.com.
+              </p>
+              <button type="submit" class="btn btn--block">Transmit Message</button>
+              <p class="form-success" id="form-status" hidden role="status"></p>
+            </form>
+          </div>
+
+          <aside class="contact-aside" aria-label="Direct channels">
+            <h2>Direct Channels</h2>
+            <dl class="contact-meta">
+              <div>
+                <dt>Email</dt>
+                <dd>
+                  <a href="mailto:contact@aquilargroup.com">contact@aquilargroup.com</a>
+                </dd>
+              </div>
+              <div>
+                <dt>LinkedIn</dt>
+                <dd>
+                  <a
+                    href="https://www.linkedin.com/company/aquilar-group"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >Aquilar Group</a
+                  >
+                </dd>
+              </div>
+              <div>
+                <dt>Jurisdiction</dt>
+                <dd>Georgia, United States</dd>
+              </div>
+              <div>
+                <dt>Entity</dt>
+                <dd>Aquilar Group, LLC</dd>
+              </div>
+            </dl>
+            <p class="clearance-note">
+              Available for clearance-friendly discussions. Do not transmit
+              classified or CUI material through this form. Use approved channels
+              for protected information.
+            </p>
+          </aside>
+        </section>
+
+        <section class="status-strip" aria-label="System status log">
+          <div class="status-strip__inner">
+            <div>
+              <ul class="status-strip__logs">
+                <li data-live-log>LOG 00:00:00</li>
+                <li>CHANNEL: OPEN</li>
+                <li>INTAKE: UNCLASSIFIED ONLY</li>
+                <li>RESPONSE PROTOCOL: ACTIVE</li>
+              </ul>
+              <p class="status-strip__integrity">
+                SYSTEMS DESIGNED FOR UNINTERRUPTED OPERATION. REDUNDANT SYSTEMS
+                MAINTAIN FLIGHT INTEGRITY.
+              </p>
+            </div>
+            <div class="status-strip__right">
+              <p class="status-strip__right-line">Clearance Aware</p>
+              <p class="status-strip__right-line">Georgia · U.S.A.</p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="footer__inner">
+          <p class="footer__copy">
+            © <span data-year>2026</span> Aquilar Group, LLC. All rights reserved.
+          </p>
+          <p class="footer__tag">
+            Designed for uninterrupted operation. Redundant systems maintain
+            flight integrity.
+          </p>
+        </div>
+      </footer>
+    </div>
+
+    <script type="module" src="js/signal.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
