@@ -4,12 +4,15 @@
 import {
   THREE,
   createRenderer,
-  prefersReducedMotion,
-} from "./three-setup.js";
+  motionScale,
+  bootViz,
+} from "./three-setup.js?v=20260729b";
 
-const canvas = document.getElementById("viz-canvas");
-if (canvas) {
-  const reduceMotion = prefersReducedMotion();
+bootViz(() => {
+  const canvas = document.getElementById("viz-canvas");
+  if (!canvas) return;
+
+  const scale = motionScale();
   const { renderer, camera } = createRenderer(canvas);
   camera.position.set(0, 0.2, 3.35);
 
@@ -189,17 +192,16 @@ if (canvas) {
   let t = 0;
   function animate() {
     requestAnimationFrame(animate);
-    t += 0.012;
-    if (!reduceMotion) {
-      root.rotation.y += 0.004;
-      orbit.rotation.z += 0.003;
-      scan.rotation.y = t * 1.2;
-      nodeMeshes.forEach((m, i) => {
-        const pulse = 1 + Math.sin(t * 2.5 + i * 0.35) * 0.18;
-        m.scale.setScalar(pulse);
-      });
-    }
+    t += 0.012 * scale;
+    // Always animate so Chrome/mobile aren't stuck static
+    root.rotation.y += 0.004 * scale;
+    orbit.rotation.z += 0.003 * scale;
+    scan.rotation.y = t * 1.2;
+    nodeMeshes.forEach((m, i) => {
+      const pulse = 1 + Math.sin(t * 2.5 + i * 0.35) * 0.18 * scale;
+      m.scale.setScalar(pulse);
+    });
     renderer.render(scene, camera);
   }
   animate();
-}
+});

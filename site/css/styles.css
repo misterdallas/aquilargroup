@@ -929,19 +929,19 @@ svg {
     display: flex;
   }
 
-  /* Solid dropdown under the hamburger (top-right), not a left slide-in */
+  /* Compact solid dropdown, right-aligned under hamburger */
   .nav {
     position: absolute;
-    top: calc(100% + 0px);
+    top: 100%;
     right: 0;
     left: auto;
-    width: min(280px, calc(100vw - 2 * var(--page-pad)));
+    width: max-content;
+    max-width: calc(100vw - 2 * var(--page-pad));
     margin: 0;
-    padding: 0.65rem;
+    padding: 0.35rem;
     background: #0a0a0a;
     border: 1px solid var(--border-orange);
-    border-top: 1px solid var(--border-orange);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.85);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.9);
     transform: none;
     opacity: 0;
     visibility: hidden;
@@ -959,13 +959,17 @@ svg {
   .nav__list {
     flex-direction: column;
     align-items: stretch;
-    gap: 0.4rem;
+    gap: 0.25rem;
+    width: max-content;
   }
 
   .nav__link {
-    justify-content: flex-start;
-    min-height: 48px;
-    padding: 0.75rem 1rem;
+    justify-content: flex-end;
+    text-align: right;
+    white-space: nowrap;
+    width: 100%;
+    min-height: 44px;
+    padding: 0.6rem 0.9rem;
     border: 1px solid var(--border-subtle);
     background: #111111;
     color: var(--cream-bright);

@@ -4,13 +4,16 @@
 import {
   THREE,
   createRenderer,
-  prefersReducedMotion,
+  motionScale,
   makeGrid,
-} from "./three-setup.js";
+  bootViz,
+} from "./three-setup.js?v=20260729b";
 
-const canvas = document.getElementById("viz-canvas");
-if (canvas) {
-  const reduceMotion = prefersReducedMotion();
+bootViz(() => {
+  const canvas = document.getElementById("viz-canvas");
+  if (!canvas) return;
+
+  const scale = motionScale();
   const { renderer, camera } = createRenderer(canvas);
   camera.position.set(0, 4.2, 0.05);
   camera.lookAt(0, 0, 0);
@@ -136,15 +139,13 @@ if (canvas) {
   let t = 0;
   function animate() {
     requestAnimationFrame(animate);
-    t += 0.014;
-    if (!reduceMotion) {
-      sweepGroup.rotation.y = t * 1.1;
-      contacts.forEach((c, i) => {
-        const pulse = 1 + Math.sin(t * 3 + i) * 0.15;
-        c.scale.setScalar(pulse);
-      });
-    }
+    t += 0.014 * scale;
+    sweepGroup.rotation.y = t * 1.1;
+    contacts.forEach((c, i) => {
+      const pulse = 1 + Math.sin(t * 3 + i) * 0.15 * scale;
+      c.scale.setScalar(pulse);
+    });
     renderer.render(scene, camera);
   }
   animate();
-}
+});

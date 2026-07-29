@@ -4,13 +4,16 @@
 import {
   THREE,
   createRenderer,
-  prefersReducedMotion,
+  motionScale,
   makeGrid,
-} from "./three-setup.js";
+  bootViz,
+} from "./three-setup.js?v=20260729b";
 
-const canvas = document.getElementById("viz-canvas");
-if (canvas) {
-  const reduceMotion = prefersReducedMotion();
+bootViz(() => {
+  const canvas = document.getElementById("viz-canvas");
+  if (!canvas) return;
+
+  const scale = motionScale();
   const { renderer, camera } = createRenderer(canvas);
   camera.position.set(0, 1.2, 4.6);
   camera.lookAt(0, 0.3, 0);
@@ -116,38 +119,36 @@ if (canvas) {
   let t = 0;
   function animate() {
     requestAnimationFrame(animate);
-    t += 0.012;
-    if (!reduceMotion) {
-      hub.rotation.y = t * 0.4;
-      hub.rotation.x = t * 0.15;
-      root.rotation.y = t * 0.12;
+    t += 0.012 * scale;
+    hub.rotation.y = t * 0.4;
+    hub.rotation.x = t * 0.15;
+    root.rotation.y = t * 0.12;
 
-      satellites.forEach((node) => {
-        const a = node.userData.angle + t * 0.25;
-        node.position.set(
-          Math.cos(a) * node.userData.radius,
-          node.userData.y,
-          Math.sin(a) * node.userData.radius
-        );
-        node.rotation.y = t;
-      });
+    satellites.forEach((node) => {
+      const a = node.userData.angle + t * 0.25;
+      node.position.set(
+        Math.cos(a) * node.userData.radius,
+        node.userData.y,
+        Math.sin(a) * node.userData.radius
+      );
+      node.rotation.y = t;
+    });
 
-      links.forEach(({ line, node }) => {
-        line.geometry.setFromPoints([hubOrigin, node.position]);
-      });
+    links.forEach(({ line, node }) => {
+      line.geometry.setFromPoints([hubOrigin, node.position]);
+    });
 
-      packets.forEach((packet) => {
-        const u =
-          (Math.sin(t * 2 + packet.userData.offset * Math.PI * 2) + 1) / 2;
-        packet.position.lerpVectors(hubOrigin, packet.userData.node.position, u);
-      });
+    packets.forEach((packet) => {
+      const u =
+        (Math.sin(t * 2 + packet.userData.offset * Math.PI * 2) + 1) / 2;
+      packet.position.lerpVectors(hubOrigin, packet.userData.node.position, u);
+    });
 
-      rings.forEach((r, i) => {
-        r.scale.setScalar(1 + Math.sin(t * 1.5 + i) * 0.04);
-        r.material.opacity = 0.2 + (Math.sin(t * 2 + i) * 0.5 + 0.5) * 0.15;
-      });
-    }
+    rings.forEach((r, i) => {
+      r.scale.setScalar(1 + Math.sin(t * 1.5 + i) * 0.04);
+      r.material.opacity = 0.2 + (Math.sin(t * 2 + i) * 0.5 + 0.5) * 0.15;
+    });
     renderer.render(scene, camera);
   }
   animate();
-}
+});

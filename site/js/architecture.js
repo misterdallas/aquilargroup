@@ -4,13 +4,16 @@
 import {
   THREE,
   createRenderer,
-  prefersReducedMotion,
+  motionScale,
   makeGrid,
-} from "./three-setup.js";
+  bootViz,
+} from "./three-setup.js?v=20260729b";
 
-const canvas = document.getElementById("viz-canvas");
-if (canvas) {
-  const reduceMotion = prefersReducedMotion();
+bootViz(() => {
+  const canvas = document.getElementById("viz-canvas");
+  if (!canvas) return;
+
+  const scale = motionScale();
   const { renderer, camera } = createRenderer(canvas);
   camera.fov = 45;
   camera.position.set(0, 1.55, 5.1);
@@ -140,24 +143,22 @@ if (canvas) {
   let t = 0;
   function animate() {
     requestAnimationFrame(animate);
-    t += 0.012;
-    if (!reduceMotion) {
-      root.rotation.y = Math.sin(t * 0.25) * 0.12 + t * 0.07;
-      animated.forEach((m) => {
-        if (m.userData.type === "cube") {
-          m.rotation.x = t * 0.25 + m.userData.phase;
-          m.rotation.y = t * 0.3 + m.userData.phase;
-        } else if (m.userData.type === "octa") {
-          m.rotation.y = t * 0.45 + m.userData.phase;
-        }
-      });
-      packets.forEach((p) => {
-        const { a, b, offset } = p.userData;
-        const u = (Math.sin(t * 1.3 + offset * Math.PI * 2) + 1) / 2;
-        p.position.lerpVectors(positions[a], positions[b], u);
-      });
-    }
+    t += 0.012 * scale;
+    root.rotation.y = Math.sin(t * 0.25) * 0.12 + t * 0.07;
+    animated.forEach((m) => {
+      if (m.userData.type === "cube") {
+        m.rotation.x = t * 0.25 + m.userData.phase;
+        m.rotation.y = t * 0.3 + m.userData.phase;
+      } else if (m.userData.type === "octa") {
+        m.rotation.y = t * 0.45 + m.userData.phase;
+      }
+    });
+    packets.forEach((p) => {
+      const { a, b, offset } = p.userData;
+      const u = (Math.sin(t * 1.3 + offset * Math.PI * 2) + 1) / 2;
+      p.position.lerpVectors(positions[a], positions[b], u);
+    });
     renderer.render(scene, camera);
   }
   animate();
-}
+});
