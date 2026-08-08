@@ -10,7 +10,7 @@ export default function HomePage() {
     <>
       <section className="page-hero">
         <div className="hero-copy">
-          <p className="section-label">Aim High · Integrity First</p>
+          <p className="section-label">AUSTERE. CONTESTED. CONNECTED.</p>
           <h1 className={`display-headline ${styles.headline}`}>
             Elevate
             <br />
@@ -45,12 +45,11 @@ export default function HomePage() {
       <StatusStrip
         logs={[
           <LiveLog key="log" />,
-          "FORMATION PATTERN: ADAPTIVE GRID",
-          "ALTITUDE BAND: 240 FT",
-          "NO HUMAN INPUT",
+          "MISSION-CRITICAL SYSTEMS SUPPORT",
+          "ALL SYSTEMS ONLINE",
         ]}
         rightLines={["MISSION OBSESSED", "AUTONOMOUS DEFENSE", "U.S.A."]}
-        integrity="SYSTEMS DESIGNED FOR UNINTERRUPTED OPERATION. REDUNDANT SYSTEMS MAINTAIN FLIGHT INTEGRITY."
+        integrity="SYSTEMS DESIGNED FOR CRITICAL OPERATIONS. COMMAND AND CONTROL | ANYTIME. ANYWHERE."
       />
     </>
   );

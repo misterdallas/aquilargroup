@@ -22,15 +22,6 @@
   color: var(--cream-muted);
 }
 
-.tag {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: rgba(232, 224, 208, 0.35);
-  max-width: 52ch;
-}
-
 @media (max-width: 640px) {
   .inner {
     flex-direction: column;

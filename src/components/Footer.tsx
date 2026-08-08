@@ -9,9 +9,6 @@ export default function Footer() {
         <p className={styles.copy}>
           © {year} Aquilar Group, LLC. All rights reserved.
         </p>
-        <p className={styles.tag}>
-          Designed for uninterrupted operation. Redundant systems maintain flight integrity.
-        </p>
       </div>
     </footer>
   );

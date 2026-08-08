@@ -2,25 +2,27 @@
 
 import { useEffect, useState } from "react";
 
-/** Live-updating mission clock for status strips */
+function formatGmtTime(date: Date): string {
+  const h = String(date.getUTCHours()).padStart(2, "0");
+  const m = String(date.getUTCMinutes()).padStart(2, "0");
+  const s = String(date.getUTCSeconds()).padStart(2, "0");
+  return `${h}:${m}:${s}`;
+}
+
+/** Live-updating GMT mission clock for status strips */
 export default function LiveLog({ prefix = "LOG" }: { prefix?: string }) {
-  const [elapsed, setElapsed] = useState(0);
+  const [time, setTime] = useState(() => formatGmtTime(new Date()));
 
   useEffect(() => {
-    const start = Date.now();
-    const id = window.setInterval(() => {
-      setElapsed(Math.floor((Date.now() - start) / 1000));
-    }, 1000);
+    const tick = () => setTime(formatGmtTime(new Date()));
+    tick();
+    const id = window.setInterval(tick, 1000);
     return () => window.clearInterval(id);
   }, []);
 
-  const h = String(Math.floor(elapsed / 3600)).padStart(2, "0");
-  const m = String(Math.floor((elapsed % 3600) / 60)).padStart(2, "0");
-  const s = String(elapsed % 60).padStart(2, "0");
-
   return (
     <span>
-      {prefix} {h}:{m}:{s}
+      {prefix} {time} GMT
     </span>
   );
 }

@@ -43,16 +43,15 @@
     });
   }
 
-  /* Live mission clock */
+  /* Live GMT mission clock */
   const logEls = document.querySelectorAll("[data-live-log]");
   if (logEls.length) {
-    const start = Date.now();
     const tick = () => {
-      const elapsed = Math.floor((Date.now() - start) / 1000);
-      const h = String(Math.floor(elapsed / 3600)).padStart(2, "0");
-      const m = String(Math.floor((elapsed % 3600) / 60)).padStart(2, "0");
-      const s = String(elapsed % 60).padStart(2, "0");
-      const text = `LOG ${h}:${m}:${s}`;
+      const now = new Date();
+      const h = String(now.getUTCHours()).padStart(2, "0");
+      const m = String(now.getUTCMinutes()).padStart(2, "0");
+      const s = String(now.getUTCSeconds()).padStart(2, "0");
+      const text = `LOG ${h}:${m}:${s} GMT`;
       logEls.forEach((el) => {
         el.textContent = text;
       });
