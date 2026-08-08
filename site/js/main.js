@@ -43,22 +43,7 @@
     });
   }
 
-  /* Live GMT mission clock */
-  const logEls = document.querySelectorAll("[data-live-log]");
-  if (logEls.length) {
-    const tick = () => {
-      const now = new Date();
-      const h = String(now.getUTCHours()).padStart(2, "0");
-      const m = String(now.getUTCMinutes()).padStart(2, "0");
-      const s = String(now.getUTCSeconds()).padStart(2, "0");
-      const text = `LOG ${h}:${m}:${s} GMT`;
-      logEls.forEach((el) => {
-        el.textContent = text;
-      });
-    };
-    tick();
-    setInterval(tick, 1000);
-  }
+  /* GMT clock lives in gmt-clock.js (separate file so stale main.js caches cannot reset it) */
 
   /* Systems protocol buttons */
   const statusOut = document.getElementById("systems-status");

@@ -2,16 +2,14 @@
 
 import { useEffect, useState } from "react";
 
+/** UTC wall-clock HH:MM:SS (same reference as https://time.is/GMT) */
 function formatGmtTime(date: Date): string {
-  const h = String(date.getUTCHours()).padStart(2, "0");
-  const m = String(date.getUTCMinutes()).padStart(2, "0");
-  const s = String(date.getUTCSeconds()).padStart(2, "0");
-  return `${h}:${m}:${s}`;
+  return date.toISOString().slice(11, 19);
 }
 
-/** Live-updating GMT mission clock for status strips */
+/** Live GMT clock for status strips — wall clock, not page elapsed time */
 export default function LiveLog({ prefix = "LOG" }: { prefix?: string }) {
-  const [time, setTime] = useState(() => formatGmtTime(new Date()));
+  const [time, setTime] = useState<string | null>(null);
 
   useEffect(() => {
     const tick = () => setTime(formatGmtTime(new Date()));
@@ -19,6 +17,15 @@ export default function LiveLog({ prefix = "LOG" }: { prefix?: string }) {
     const id = window.setInterval(tick, 1000);
     return () => window.clearInterval(id);
   }, []);
+
+  // Avoid SSR/hydration flash of a fake 00:00:00 timer
+  if (time === null) {
+    return (
+      <span>
+        {prefix} --:--:-- GMT
+      </span>
+    );
+  }
 
   return (
     <span>
